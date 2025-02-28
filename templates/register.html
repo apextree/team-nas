@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Register - BokoHacks</title>
+  <style>
+    .register-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .register-header h2 {
+      color: var(--maroon);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .register-header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e1e1e1;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--maroon);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(80, 18, 20, 0.1);
+    }
+
+    .password-requirements {
+      margin: 1rem 0;
+      padding: 1.5rem;
+      border: 1px solid #e1e1e1;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+    }
+
+    .password-requirements h3 {
+      color: var(--maroon);
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .password-requirements ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      list-style-type: none;
+    }
+
+    .password-requirements li {
+      margin-bottom: 0.5rem;
+      color: #555;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .password-requirements li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--maroon);
+      font-weight: bold;
+    }
+
+    .requirements-not-met {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 4px solid #dc3545;
+      background-color: #fff5f5;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .requirements-not-met p {
+      margin: 0.5rem 0;
+      color: #dc3545;
+    }
+
+    .captcha-box {
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      border: 2px dashed #e1e1e1;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .captcha-image {
+      max-width: 250px;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--maroon);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #3c0e0f;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #666;
+    }
+
+    .login-link a {
+      color: var(--maroon);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .flash-messages {
+      margin-bottom: 2rem;
+    }
+
+    .flash {
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .flash.error {
+      background-color: #fff5f5;
+      border: 1px solid #dc3545;
+      color: #dc3545;
+    }
+
+    .flash.success {
+      background-color: #f0fff4;
+      border: 1px solid #38a169;
+      color: #38a169;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Register</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('home.home') }}">Home</a></li>
+        <li><a href="{{ url_for('login.login') }}">Login</a></li>
+        <li><a href="{{ url_for('register.register') }}" class="active">Register</a></li>
+        <li><a href="{{ url_for('about.about') }}">About</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <div class="register-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      <div class="register-header">
+        <h2>Create an Account</h2>
+        <p>Sign up to participate in BokoHacks and test your security skills.</p>
+      </div>
+
+      <form action="{{ url_for('register.register') }}" method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" value="{{ form_data.username }}" placeholder="Choose a username" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" value="{{ form_data.password }}" placeholder="Create a strong password" required>
+          
+          <div class="password-requirements">
+            <h3>Password Requirements</h3>
+            <ul>
+              <li>At least 8 characters long</li>
+              <li>At least 2 uppercase letters</li>
+              <li>At least 2 numbers</li>
+              <li>At least 2 special characters</li>
+              <li>At least 2 non-letter characters</li>
+            </ul>
+            {% if password_requirements %}
+              <div class="requirements-not-met">
+                <p><strong>Requirements not met:</strong></p>
+                {% for requirement in password_requirements %}
+                  <p>{{ requirement }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="captcha">CAPTCHA Verification</label>
+          <div class="captcha-box">
+            <img src="{{ url_for('captcha.get_captcha') }}" alt="CAPTCHA" class="captcha-image">
+          </div>
+          <input type="text" id="captcha" name="captcha" placeholder="Enter the result of the math operation" required>
+        </div>
+        
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+
+      <p class="login-link">Already have an account? <a href="{{ url_for('login.login') }}">Login here</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BokoHacks | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
