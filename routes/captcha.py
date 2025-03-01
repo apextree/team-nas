@@ -1,5 +1,4 @@
 from flask import Blueprint, send_file, session
-from flask_talisman import Talisman  # Note the uppercase Talisman
 from io import BytesIO
 import random
 import string
@@ -7,10 +6,10 @@ from captcha.image import ImageCaptcha
 from utils.captcha import generate_captcha
 
 captcha_bp = Blueprint("captcha", __name__)
-talisman = Talisman()  # Create an instance first
+
 
 @captcha_bp.route("/captcha/generate", methods=["GET"])
-@talisman(content_security_policy=None)  # Use the instance as a decorator
+
 def get_captcha():
     # Generate two different random numbers
     num1 = random.randint(1, 20)
