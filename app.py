@@ -1,7 +1,4 @@
-
 from flask import Flask
-
-from flask_talisman import Talisman  # Note the uppercase Talisman
 from extensions import db
 from routes.home import home_bp
 from routes.hub import hub_bp
