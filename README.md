@@ -79,7 +79,7 @@ Before you begin, ensure you have the following installed:
     - Clone repositories using HTTPS:
         
         ```bash
-        git clone https://github.com/Nick4453/Boko-Hacks-2025.git
+        git clone https://github.com/apextree/team-nas.git
         ```
         
     - If prompted for credentials frequently, enable the credential manager:
