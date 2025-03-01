@@ -43,7 +43,7 @@ Before you begin, ensure you have the following installed:
     Open your terminal or command prompt and run:
     
     ```bash
-    git clone https://github.com/](https://github.com/apextree/team-nas.git
+    git clone https://github.com/apextree/team-nas.git
     cd Boko-Hacks-2025
     ```
     
