@@ -44,7 +44,7 @@ Before you begin, ensure you have the following installed:
     
     ```bash
     git clone https://github.com/apextree/team-nas.git
-    cd Boko-Hacks-2025
+    cd team-nas
     ```
     
 2. **Git Setup (For Beginners)**
